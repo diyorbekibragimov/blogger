@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %} {{ page_title }} {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'post/css/all_posts.css' %}" />
+{% endblock %}
+
+{% block main %}
+<div class="row row-cols-1 row-cols-md-3 g-4 p-3">
+    {% for post in posts %}
+        <a href="{% url 'post:expand_post' post.id %}" class="col text-decoration-none" id="post{{ post.id }}">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{ post.cover_image.url }}" alt="Cover image of the post.">
+                <div class="card-body">
+                    <p class="card-text text-dark">{{ post.content|truncatechars:100 }}</p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}
